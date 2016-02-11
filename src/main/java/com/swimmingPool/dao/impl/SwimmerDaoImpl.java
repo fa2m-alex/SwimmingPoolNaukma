@@ -14,7 +14,7 @@ public class SwimmerDaoImpl implements SwimmerDao {
     private static final String USER = Constants.USER;
     private static final String PASS = Constants.PASS;
 
-    private String insert = "INSERT INTO swimmer (id, name, surname, birthday, growth) VALUES (NULL, ?, ?, ?, ?)";
+    private String insert = "INSERT INTO swimmer (id, name, surname, birthday, growth, coach_id) VALUES (NULL, ?, ?, ?, ?, ?)";
     private String getAll = "SELECT * FROM swimmer";
     private String getById = "SELECT * FROM swimmer WHERE id = ?";
 
@@ -29,6 +29,7 @@ public class SwimmerDaoImpl implements SwimmerDao {
             preparedStatement.setString(2, swimmer.getSurname());
             preparedStatement.setDate(3, (Date) swimmer.getBirthday());
             preparedStatement.setInt(4, swimmer.getGrowth());
+            preparedStatement.setInt(5, swimmer.getCoach_id());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
