@@ -1,6 +1,7 @@
 package com.swimmingPool;
 
 import com.swimmingPool.dao.impl.SwimmerDaoImpl;
+import com.swimmingPool.dao.interfaces.SwimmerDao;
 import com.swimmingPool.models.Swimmer;
 
 import java.text.DateFormat;
@@ -21,7 +22,7 @@ public class Main {
         s.setBirthday(d);
         s.setGrowth(180);
 
-        SwimmerDaoImpl dao = new SwimmerDaoImpl();
+        SwimmerDao dao = new SwimmerDaoImpl();
         dao.insert(s);
 
     }

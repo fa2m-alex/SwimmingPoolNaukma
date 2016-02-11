@@ -1,34 +1,36 @@
 package com.swimmingPool.dao.impl;
 
-import com.swimmingPool.dao.interfaces.SwimmerDao;
-import com.swimmingPool.models.Swimmer;
+import com.swimmingPool.dao.interfaces.CoachDao;
+import com.swimmingPool.models.Coach;
 import com.swimmingPool.resources.Constants;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SwimmerDaoImpl implements SwimmerDao {
+/**
+ * Created by Alex on 11.02.2016.
+ */
+public class CoachDaoImpl implements CoachDao {
 
     private static final String DB = Constants.DB;
     private static final String USER = Constants.USER;
     private static final String PASS = Constants.PASS;
 
-    private String insert = "INSERT INTO swimmer (id, name, surname, birthday, growth) VALUES (NULL, ?, ?, ?, ?)";
-    private String getAll = "SELECT * FROM swimmer";
-    private String getById = "SELECT * FROM swimmer WHERE id = ?";
+    private String insert = "INSERT INTO coach (id, name, surname, birthday) VALUES (NULL, ?, ?, ?)";
+    private String getAll = "SELECT * FROM coach";
+    private String getById = "SELECT * FROM coach WHERE id = ?";
 
-    public void insert(Swimmer swimmer) {
+    public void insert(Coach coach) {
         try {
             Class.forName ("com.mysql.jdbc.Driver") ;
             Connection conn = DriverManager.getConnection(DB, USER, PASS);
 
             PreparedStatement preparedStatement = conn.prepareStatement(insert);
 
-            preparedStatement.setString(1, swimmer.getName());
-            preparedStatement.setString(2, swimmer.getSurname());
-            preparedStatement.setDate(3, (Date) swimmer.getBirthday());
-            preparedStatement.setInt(4, swimmer.getGrowth());
+            preparedStatement.setString(1, coach.getName());
+            preparedStatement.setString(2, coach.getSurname());
+            preparedStatement.setDate(3, (Date) coach.getBirthday());
 
             preparedStatement.executeUpdate();
             preparedStatement.close();
@@ -39,11 +41,10 @@ public class SwimmerDaoImpl implements SwimmerDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
     }
 
-    public List<Swimmer> getAll() {
-        List<Swimmer> swimmers = new LinkedList<Swimmer>();
+    public List<Coach> getAll() {
+        List<Coach> coaches = new LinkedList<Coach>();
         try {
             Class.forName ("com.mysql.jdbc.Driver") ;
             Connection conn = DriverManager.getConnection(DB, USER, PASS);
@@ -52,17 +53,15 @@ public class SwimmerDaoImpl implements SwimmerDao {
 
             ResultSet resultSet = statement.executeQuery(getAll);
 
-            Swimmer swimmer = null;
+            Coach coach = null;
             while(resultSet.next()){
-                swimmer = new Swimmer();
-                swimmer.setId(resultSet.getInt("id"));
-                swimmer.setName(resultSet.getString("name"));
-                swimmer.setSurname(resultSet.getString("surname"));
-                swimmer.setBirthday(resultSet.getDate("birthday"));
-                swimmer.setGrowth(resultSet.getInt("growth"));
-                swimmer.setCoach_id(resultSet.getInt("coach_id"));
+                coach = new Coach();
+                coach.setId(resultSet.getInt("id"));
+                coach.setName(resultSet.getString("name"));
+                coach.setSurname(resultSet.getString("surname"));
+                coach.setBirthday(resultSet.getDate("birthday"));
 
-                swimmers.add(swimmer);
+                coaches.add(coach);
             }
             resultSet.close();
             statement.close();
@@ -74,11 +73,11 @@ public class SwimmerDaoImpl implements SwimmerDao {
             e.printStackTrace();
         }
 
-        return swimmers;
+        return coaches;
     }
 
-    public Swimmer getById(int id){
-        Swimmer swimmer = new Swimmer();
+    public Coach getById(int id) {
+        Coach coach = new Coach();
         try {
             Class.forName ("com.mysql.jdbc.Driver") ;
             Connection conn = DriverManager.getConnection(DB, USER, PASS);
@@ -89,13 +88,11 @@ public class SwimmerDaoImpl implements SwimmerDao {
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                swimmer = new Swimmer();
-                swimmer.setId(resultSet.getInt("id"));
-                swimmer.setName(resultSet.getString("name"));
-                swimmer.setSurname(resultSet.getString("surname"));
-                swimmer.setBirthday(resultSet.getDate("birthday"));
-                swimmer.setGrowth(resultSet.getInt("growth"));
-                swimmer.setCoach_id(resultSet.getInt("coach_id"));
+                coach = new Coach();
+                coach.setId(resultSet.getInt("id"));
+                coach.setName(resultSet.getString("name"));
+                coach.setSurname(resultSet.getString("surname"));
+                coach.setBirthday(resultSet.getDate("birthday"));
             }
 
             resultSet.close();
@@ -106,6 +103,6 @@ public class SwimmerDaoImpl implements SwimmerDao {
             e.printStackTrace();
         }
 
-        return swimmer;
+        return coach;
     }
 }
