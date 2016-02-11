@@ -17,8 +17,8 @@ public class InjuryDaoImpl implements InjuryDao {
     private static final String USER = Constants.USER;
     private static final String PASS = Constants.PASS;
 
-    private String insert = "INSERT INTO competition (id, swimmer_id, title, date) VALUES (NULL, ?, ?, ?)";
-    private String getAll = "SELECT * FROM competition";
+    private String insert = "INSERT INTO injury (id, swimmer_id, title, date) VALUES (NULL, ?, ?, ?)";
+    private String getAll = "SELECT * FROM injury";
 
     public void insert(Injury injury) {
         try {
