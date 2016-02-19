@@ -17,6 +17,7 @@ public class SwimmerDaoImpl implements SwimmerDao {
     private String insert = "INSERT INTO swimmer (id, name, surname, birthday, growth, coach_id) VALUES (NULL, ?, ?, ?, ?, ?)";
     private String getAll = "SELECT * FROM swimmer";
     private String getById = "SELECT * FROM swimmer WHERE id = ?";
+    private String update = "UPDATE swimmer SET name=?, surname=?, birthday=?, growth=?, coach_id=? WHERE id=?";
 
     public void insert(Swimmer swimmer) {
         try {
@@ -108,5 +109,31 @@ public class SwimmerDaoImpl implements SwimmerDao {
         }
 
         return swimmer;
+    }
+
+    public void update(Swimmer swimmer) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(update);
+
+            preparedStatement.setString(1, swimmer.getName());
+            preparedStatement.setString(2, swimmer.getSurname());
+            preparedStatement.setDate(3, (Date) swimmer.getBirthday());
+            preparedStatement.setInt(4, swimmer.getGrowth());
+            preparedStatement.setInt(5, swimmer.getCoach_id());
+            preparedStatement.setInt(6, swimmer.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

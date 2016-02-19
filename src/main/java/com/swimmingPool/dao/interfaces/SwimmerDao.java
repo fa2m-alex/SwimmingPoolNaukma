@@ -8,4 +8,5 @@ public interface SwimmerDao {
     public void insert(Swimmer swimmer);
     public List<Swimmer> getAll();
     public Swimmer getById(int id);
+    public void update(Swimmer swimmer);
 }
