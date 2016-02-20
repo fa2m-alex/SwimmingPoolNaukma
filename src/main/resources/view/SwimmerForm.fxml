@@ -43,6 +43,13 @@
                         <Label fx:id="growthLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
+                  <HBox layoutX="236.0" layoutY="259.0" spacing="3.0">
+                     <children>
+                        <Button layoutX="243.0" layoutY="259.0" mnemonicParsing="false" onAction="#newSwimmer" text="New.." />
+                        <Button layoutX="295.0" layoutY="259.0" mnemonicParsing="false" onAction="#editSwimmer" text="Edit.." />
+                        <Button layoutX="347.0" layoutY="259.0" mnemonicParsing="false" text="Delete" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
         </items>

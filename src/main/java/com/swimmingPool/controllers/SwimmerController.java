@@ -5,6 +5,7 @@ import com.swimmingPool.models.Swimmer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -80,11 +81,7 @@ public class SwimmerController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        ObservableList<Swimmer> personData = FXCollections.observableArrayList();
-        for (Swimmer swimmer : mainApp.getSwimmers()) {
-            personData.add(swimmer);
-        }
-        swimmerTable.setItems(personData);
+        swimmerTable.setItems(mainApp.getPersonData());
     }
 
     /**
@@ -107,30 +104,32 @@ public class SwimmerController {
         }
     }*/
 
-    /**
-     * Called when the user clicks the new button. Opens a dialog to edit
-     * details for a new person.
-     */
-   /* @FXML
-    private void handleNewPerson() {
-        PojoPerson tempPerson = new PojoPerson();
-        boolean okClicked = mainApp.showPersonEditDialog(tempPerson);
-        if (okClicked) {
-            mainApp.getPersonData().add(tempPerson);
-        }
-    }*/
 
-    /**
-     * Called when the user clicks the edit button. Opens a dialog to edit
-     * details for the selected person.
-     */
-    /*@FXML
-    private void handleEditPerson() {
-        PojoPerson selectedPerson = personTable.getSelectionModel().getSelectedItem();
-        if (selectedPerson != null) {
-            boolean okClicked = mainApp.showPersonEditDialog(selectedPerson);
+    @FXML
+    private void newSwimmer() {
+        Swimmer temp = new Swimmer();
+        boolean okClicked = mainApp.showSwimmerEditDialog(temp);
+        if (okClicked) {
+            mainApp.getPersonData().add(temp);
+            mainApp.getSwimmerDao().insert(temp);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Swimmer has been added");
+            alert.setHeaderText("Swimmer has been added");
+            alert.showAndWait();
+        }
+    }
+
+
+    @FXML
+    private void editSwimmer() {
+        Swimmer selectedSwimmer = swimmerTable.getSelectionModel().getSelectedItem();
+        if (selectedSwimmer != null) {
+            boolean okClicked = mainApp.showSwimmerEditDialog(selectedSwimmer);
             if (okClicked) {
-                showPersonDetails(selectedPerson);
+                mainApp.getSwimmerDao().update(selectedSwimmer);
+                showPersonDetails(selectedSwimmer);
+                swimmerTable.refresh();
             }
 
         } else {
@@ -143,5 +142,5 @@ public class SwimmerController {
 
             alert.showAndWait();
         }
-    }*/
+    }
 }
