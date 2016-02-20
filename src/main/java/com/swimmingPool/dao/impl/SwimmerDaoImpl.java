@@ -18,6 +18,7 @@ public class SwimmerDaoImpl implements SwimmerDao {
     private String getAll = "SELECT * FROM swimmer";
     private String getById = "SELECT * FROM swimmer WHERE id = ?";
     private String update = "UPDATE swimmer SET name=?, surname=?, birthday=?, growth=?, coach_id=? WHERE id=?";
+    private String delete = "DELETE FROM swimmer WHERE id=?";
 
     public void insert(Swimmer swimmer) {
         try {
@@ -135,5 +136,25 @@ public class SwimmerDaoImpl implements SwimmerDao {
             e.printStackTrace();
         }
 
+    }
+
+    public void delete(Swimmer swimmer) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(delete);
+
+            preparedStatement.setInt(1, swimmer.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

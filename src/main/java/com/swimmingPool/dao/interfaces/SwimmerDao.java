@@ -9,4 +9,5 @@ public interface SwimmerDao {
     public List<Swimmer> getAll();
     public Swimmer getById(int id);
     public void update(Swimmer swimmer);
+    public void delete(Swimmer swimmer);
 }

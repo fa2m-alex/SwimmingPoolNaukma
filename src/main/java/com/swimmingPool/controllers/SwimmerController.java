@@ -87,11 +87,12 @@ public class SwimmerController {
     /**
      * Called when the user clicks on the delete button.
      */
-   /* @FXML
-    private void handleDeletePerson() {
-        int selectedIndex = personTable.getSelectionModel().getSelectedIndex();
+    @FXML
+    private void deleteSwimmer() {
+        int selectedIndex = swimmerTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            personTable.getItems().remove(selectedIndex);
+            mainApp.getSwimmerDao().delete(swimmerTable.getSelectionModel().getSelectedItem());
+            swimmerTable.getItems().remove(selectedIndex);
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -102,7 +103,7 @@ public class SwimmerController {
 
             alert.showAndWait();
         }
-    }*/
+    }
 
 
     @FXML
