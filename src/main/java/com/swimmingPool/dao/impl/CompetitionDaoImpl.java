@@ -19,6 +19,8 @@ public class CompetitionDaoImpl implements CompetitionDao {
 
     private String insert = "INSERT INTO competition (id, type_id, discipline_id, title, date) VALUES (NULL, ?, ?, ?, ?)";
     private String getAll = "SELECT * FROM competition";
+    private String update = "UPDATE competition SET type_id=?, discipline_id=?, title=?, date=? WHERE id=?";
+    private String delete = "DELETE FROM competition WHERE id=?";
 
     public void insert(Competition competition) {
         try {
@@ -75,5 +77,49 @@ public class CompetitionDaoImpl implements CompetitionDao {
         }
 
         return competitions;
+    }
+
+    public void update(Competition competition) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(update);
+
+            preparedStatement.setInt(1, competition.getType_id());
+            preparedStatement.setInt(2, competition.getDiscipline_id());
+            preparedStatement.setString(3, competition.getTitle());
+            preparedStatement.setDate(4, (Date) competition.getDate());
+            preparedStatement.setInt(5, competition.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(Competition competition) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(delete);
+
+            preparedStatement.setInt(1, competition.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

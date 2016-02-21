@@ -20,6 +20,8 @@ public class CoachDaoImpl implements CoachDao {
     private String insert = "INSERT INTO coach (id, name, surname, birthday) VALUES (NULL, ?, ?, ?)";
     private String getAll = "SELECT * FROM coach";
     private String getById = "SELECT * FROM coach WHERE id = ?";
+    private String update = "UPDATE coach SET name=?, surname=?, birthday=? WHERE id=?";
+    private String delete = "DELETE FROM coach WHERE id=?";
 
     public void insert(Coach coach) {
         try {
@@ -104,5 +106,48 @@ public class CoachDaoImpl implements CoachDao {
         }
 
         return coach;
+    }
+
+    public void update(Coach coach) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(update);
+
+            preparedStatement.setString(1, coach.getName());
+            preparedStatement.setString(2, coach.getSurname());
+            preparedStatement.setDate(3, (Date) coach.getBirthday());
+            preparedStatement.setInt(4, coach.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(Coach coach) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(delete);
+
+            preparedStatement.setInt(1, coach.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -18,7 +18,9 @@ public class CompetitionTableDaoImpl implements CompetitionTableDao {
     private static final String PASS = Constants.PASS;
 
     private String insert = "INSERT INTO competition_table (id, competition_id, swimmer_id) VALUES (NULL, ?, ?)";
-    private String getAll = "SELECT * FROM competition_type";
+    private String getAll = "SELECT * FROM competition_table";
+    private String update = "UPDATE competition_table SET competition_id=?, swimmer_id=? WHERE id=?";
+    private String delete = "DELETE FROM competition_table WHERE id=?";
 
     public void insert(CompetitionTable competitionTable) {
         try {
@@ -71,5 +73,47 @@ public class CompetitionTableDaoImpl implements CompetitionTableDao {
         }
 
         return competitionTables;
+    }
+
+    public void update(CompetitionTable competitionTable) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(update);
+
+            preparedStatement.setInt(1, competitionTable.getCompetition_id());
+            preparedStatement.setInt(2, competitionTable.getSwimmer_id());
+            preparedStatement.setInt(3, competitionTable.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(CompetitionTable competitionTable) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(delete);
+
+            preparedStatement.setInt(1, competitionTable.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

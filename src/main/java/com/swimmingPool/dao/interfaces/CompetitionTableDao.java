@@ -10,4 +10,6 @@ import java.util.List;
 public interface CompetitionTableDao {
     public void insert(CompetitionTable competitionTable);
     public List<CompetitionTable> getAll();
+    public void update(CompetitionTable competitionTable);
+    public void delete(CompetitionTable competitionTable);
 }
