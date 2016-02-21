@@ -10,4 +10,6 @@ import java.util.List;
 public interface DisciplineDao {
     public void insert(Discipline discipline);
     public List<Discipline> getAll();
+    public void update(Discipline discipline);
+    public void delete(Discipline discipline);
 }

@@ -18,6 +18,8 @@ public class DisciplineDaoImpl implements DisciplineDao {
 
     private String insert = "INSERT INTO discipline (id, title) VALUES (NULL, ?)";
     private String getAll = "SELECT * FROM discipline";
+    private String update = "UPDATE discipline SET title=? WHERE id=?";
+    private String delete = "DELETE FROM discipline WHERE id=?";
 
     public void insert(Discipline discipline) {
         try {
@@ -68,5 +70,46 @@ public class DisciplineDaoImpl implements DisciplineDao {
         }
 
         return disciplines;
+    }
+
+    public void update(Discipline discipline) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(update);
+
+            preparedStatement.setString(1, discipline.getTitle());
+            preparedStatement.setInt(2, discipline.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void delete(Discipline discipline) {
+        try {
+            Class.forName ("com.mysql.jdbc.Driver") ;
+            Connection conn = DriverManager.getConnection(DB, USER, PASS);
+
+            PreparedStatement preparedStatement = conn.prepareStatement(delete);
+
+            preparedStatement.setInt(1, discipline.getId());
+
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+
+            conn.close();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
