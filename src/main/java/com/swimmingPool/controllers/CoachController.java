@@ -125,61 +125,32 @@ public class CoachController {
     }
 
 
-   /* @FXML
+    @FXML
     private void newCoach() {
         Coach temp = new Coach();
-        boolean okClicked = showSwimmerEditDialog(temp);
+        boolean okClicked = showCoachEditDialog(temp);
         if (okClicked) {
             personData.add(temp);
-            mainApp.getSwimmerDao().insert(temp);
+            coachDao.insert(temp);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("Swimmer has been added");
-            alert.setHeaderText("Swimmer has been added");
+            alert.setTitle("Coach has been added");
+            alert.setHeaderText("Coach has been added");
             alert.showAndWait();
         }
-    }*/
-
-    /*public boolean showSwimmerEditDialog(Coach coach) {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/view/SwimmerEditForm.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Swwimmer");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(mainApp.getPrimaryStage());
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            SwimmerEditController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setSwimmer(swimmer);
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isOkClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }*/
+    }
 
 
-   /* @FXML
-    private void editSwimmer() {
-        Swimmer selectedSwimmer = swimmerTable.getSelectionModel().getSelectedItem();
-        if (selectedSwimmer != null) {
-            boolean okClicked = showSwimmerEditDialog(selectedSwimmer);
+
+    @FXML
+    private void editCoach() {
+        Coach selectedCoach = coachTable.getSelectionModel().getSelectedItem();
+        if (selectedCoach != null) {
+            boolean okClicked = showCoachEditDialog(selectedCoach);
             if (okClicked) {
-                mainApp.getSwimmerDao().update(selectedSwimmer);
-                showPersonDetails(selectedSwimmer);
-                swimmerTable.refresh();
+                coachDao.update(selectedCoach);
+                showPersonDetails(selectedCoach);
+                coachTable.refresh();
             }
 
         } else {
@@ -192,5 +163,36 @@ public class CoachController {
 
             alert.showAndWait();
         }
-    }*/
+    }
+
+    public boolean showCoachEditDialog(Coach coach) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/view/CoachEditForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Coach");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainApp.getPrimaryStage());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            CoachEditController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCoach(coach);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

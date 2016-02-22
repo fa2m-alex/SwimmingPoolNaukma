@@ -41,6 +41,13 @@
                         <Label fx:id="birthdayLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
+                  <HBox layoutX="228.0" layoutY="199.0" spacing="4.0">
+                     <children>
+                        <Button layoutX="204.0" layoutY="199.0" mnemonicParsing="false" onAction="#newCoach" text="New.." />
+                        <Button layoutX="263.0" layoutY="199.0" mnemonicParsing="false" onAction="#editCoach" text="Edit.." />
+                        <Button layoutX="321.0" layoutY="199.0" mnemonicParsing="false" onAction="#deleteCoach" text="Delete" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
         </items>
