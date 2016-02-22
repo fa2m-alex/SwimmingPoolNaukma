@@ -5,11 +5,18 @@ import com.swimmingPool.models.Swimmer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+import java.io.IOException;
 
 /**
  * Created by Alex on 17.02.2016.
@@ -109,7 +116,7 @@ public class SwimmerController {
     @FXML
     private void newSwimmer() {
         Swimmer temp = new Swimmer();
-        boolean okClicked = mainApp.showSwimmerEditDialog(temp);
+        boolean okClicked = showSwimmerEditDialog(temp);
         if (okClicked) {
             mainApp.getPersonData().add(temp);
             mainApp.getSwimmerDao().insert(temp);
@@ -121,12 +128,42 @@ public class SwimmerController {
         }
     }
 
+    public boolean showSwimmerEditDialog(Swimmer swimmer) {
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/view/SwimmerEditForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Swwimmer");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainApp.getPrimaryStage());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            SwimmerEditController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setSwimmer(swimmer);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     @FXML
     private void editSwimmer() {
         Swimmer selectedSwimmer = swimmerTable.getSelectionModel().getSelectedItem();
         if (selectedSwimmer != null) {
-            boolean okClicked = mainApp.showSwimmerEditDialog(selectedSwimmer);
+            boolean okClicked = showSwimmerEditDialog(selectedSwimmer);
             if (okClicked) {
                 mainApp.getSwimmerDao().update(selectedSwimmer);
                 showPersonDetails(selectedSwimmer);

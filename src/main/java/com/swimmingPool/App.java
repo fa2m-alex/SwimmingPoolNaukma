@@ -1,5 +1,6 @@
 package com.swimmingPool;
 
+import com.swimmingPool.controllers.RootLayoutController;
 import com.swimmingPool.controllers.SwimmerController;
 import com.swimmingPool.controllers.SwimmerEditController;
 import com.swimmingPool.dao.impl.SwimmerDaoImpl;
@@ -38,6 +39,10 @@ public class App extends Application {
         return personData;
     }
 
+    public BorderPane getRootLayout() {
+        return rootLayout;
+    }
+
     public SwimmerDao getSwimmerDao() {
         return swimmerDao;
     }
@@ -63,56 +68,8 @@ public class App extends Application {
 
         initRootLayout();
 
-        showSwimmerForm();
     }
 
-    private void showSwimmerForm() {
-        try {
-            // Load person overview.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/view/SwimmerForm.fxml"));
-            AnchorPane personOverview = (AnchorPane) loader.load();
-
-            // Set person overview into the center of root layout.
-            rootLayout.setCenter(personOverview);
-
-            // Give the controller access to the main app.
-            SwimmerController controller = loader.getController();
-            controller.setMainApp(this);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public boolean showSwimmerEditDialog(Swimmer swimmer) {
-        try {
-            // Load the fxml file and create a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/view/SwimmerEditForm.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-
-            // Create the dialog Stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Swwimmer");
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            // Set the person into the controller.
-            SwimmerEditController controller = loader.getController();
-            controller.setDialogStage(dialogStage);
-            controller.setSwimmer(swimmer);
-
-            // Show the dialog and wait until the user closes it
-            dialogStage.showAndWait();
-
-            return controller.isOkClicked();
-        } catch (IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
 
     private void initRootLayout() {
         try {
@@ -124,6 +81,12 @@ public class App extends Application {
             // Show the scene containing the root layout.
             Scene scene = new Scene(rootLayout);
             primaryStage.setScene(scene);
+
+            // Give the controller access to the main app.
+            RootLayoutController controller = loader.getController();
+            controller.setMainApp(this);
+
+
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();

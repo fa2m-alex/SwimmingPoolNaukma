@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.SwimmerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="240.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.SwimmerController">
    <children>
       <SplitPane dividerPositions="0.33444816053511706" layoutX="93.0" layoutY="62.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -43,7 +43,7 @@
                         <Label fx:id="growthLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <HBox layoutX="236.0" layoutY="259.0" spacing="3.0">
+                  <HBox layoutX="236.0" layoutY="199.0" spacing="3.0">
                      <children>
                         <Button layoutX="243.0" layoutY="259.0" mnemonicParsing="false" onAction="#newSwimmer" text="New.." />
                         <Button layoutX="295.0" layoutY="259.0" mnemonicParsing="false" onAction="#editSwimmer" text="Edit.." />
