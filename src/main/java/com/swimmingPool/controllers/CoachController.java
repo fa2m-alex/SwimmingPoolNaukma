@@ -1,9 +1,9 @@
 package com.swimmingPool.controllers;
 
 import com.swimmingPool.App;
-import com.swimmingPool.dao.impl.SwimmerDaoImpl;
-import com.swimmingPool.dao.interfaces.SwimmerDao;
-import com.swimmingPool.models.Swimmer;
+import com.swimmingPool.dao.impl.CoachDaoImpl;
+import com.swimmingPool.dao.interfaces.CoachDao;
+import com.swimmingPool.models.Coach;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -22,15 +22,15 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Created by Alex on 17.02.2016.
+ * Created by Alex on 22.02.2016.
  */
-public class SwimmerController {
+public class CoachController {
     @FXML
-    private TableView<Swimmer> swimmerTable;
+    private TableView<Coach> coachTable;
     @FXML
-    private TableColumn<Swimmer, String> nameColumn;
+    private TableColumn<Coach, String> nameColumn;
     @FXML
-    private TableColumn<Swimmer, String> surnameColumn;
+    private TableColumn<Coach, String> surnameColumn;
 
     @FXML
     private Label nameLabel;
@@ -38,30 +38,28 @@ public class SwimmerController {
     private Label surnameLabel;
     @FXML
     private Label birthdayLabel;
-    @FXML
-    private Label growthLabel;
+
 
 
     // Reference to the main application.
     private App mainApp;
 
-    private List<Swimmer> swimmers = null;
-    ObservableList<Swimmer> personData = null;
+    private List<Coach> coaches = null;
+    ObservableList<Coach> personData = null;
 
-    private SwimmerDao swimmerDao;
-
+    private CoachDao coachDao;
 
     /**
      * The constructor.
      * The constructor is called before the initialize() method.
      */
-    public SwimmerController() {
-        swimmerDao = new SwimmerDaoImpl();
-        swimmers = swimmerDao.getAll();
+    public CoachController() {
+        coachDao = new CoachDaoImpl();
+        coaches = coachDao.getAll();
 
         personData = FXCollections.observableArrayList();
-        for (Swimmer swimmer : swimmers) {
-            personData.add(swimmer);
+        for (Coach coach : coaches) {
+            personData.add(coach);
         }
     }
 
@@ -73,29 +71,27 @@ public class SwimmerController {
     private void initialize() {
         // Initialize the person table with the two columns.
 
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Swimmer, String>("name"));
-        surnameColumn.setCellValueFactory(new PropertyValueFactory<Swimmer, String>("surname"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<Coach, String>("name"));
+        surnameColumn.setCellValueFactory(new PropertyValueFactory<Coach, String>("surname"));
 
         // Clear person details.
         showPersonDetails(null);
 
         // Listen for selection changes and show the person details when changed.
-        swimmerTable.getSelectionModel().selectedItemProperty().addListener(
+        coachTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showPersonDetails(newValue));
     }
 
-    private void showPersonDetails(Swimmer swimmer) {
-        if (swimmer != null) {
+    private void showPersonDetails(Coach coach) {
+        if (coach != null) {
             // Fill the labels with info from the person object.
-            nameLabel.setText(swimmer.getName());
-            surnameLabel.setText(swimmer.getSurname());
-            growthLabel.setText(String.valueOf(swimmer.getGrowth()));
-            birthdayLabel.setText(swimmer.getBirthday().toString());
+            nameLabel.setText(coach.getName());
+            surnameLabel.setText(coach.getSurname());
+            birthdayLabel.setText(coach.getBirthday().toString());
         } else {
             // Person is null, remove all the text.
             nameLabel.setText("");
             surnameLabel.setText("");
-            growthLabel.setText("");
             birthdayLabel.setText("");
         }
     }
@@ -104,18 +100,18 @@ public class SwimmerController {
         this.mainApp = mainApp;
 
         // Add observable list data to the table
-        swimmerTable.setItems(personData);
+        coachTable.setItems(personData);
     }
 
     /**
      * Called when the user clicks on the delete button.
      */
     @FXML
-    private void deleteSwimmer() {
-        int selectedIndex = swimmerTable.getSelectionModel().getSelectedIndex();
+    private void deleteCoach() {
+        int selectedIndex = coachTable.getSelectionModel().getSelectedIndex();
         if (selectedIndex >= 0) {
-            swimmerDao.delete(swimmerTable.getSelectionModel().getSelectedItem());
-            swimmerTable.getItems().remove(selectedIndex);
+            coachDao.delete(coachTable.getSelectionModel().getSelectedItem());
+            coachTable.getItems().remove(selectedIndex);
         } else {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -129,22 +125,22 @@ public class SwimmerController {
     }
 
 
-    @FXML
-    private void newSwimmer() {
-        Swimmer temp = new Swimmer();
+   /* @FXML
+    private void newCoach() {
+        Coach temp = new Coach();
         boolean okClicked = showSwimmerEditDialog(temp);
         if (okClicked) {
             personData.add(temp);
-            swimmerDao.insert(temp);
+            mainApp.getSwimmerDao().insert(temp);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.initOwner(mainApp.getPrimaryStage());
             alert.setTitle("Swimmer has been added");
             alert.setHeaderText("Swimmer has been added");
             alert.showAndWait();
         }
-    }
+    }*/
 
-    public boolean showSwimmerEditDialog(Swimmer swimmer) {
+    /*public boolean showSwimmerEditDialog(Coach coach) {
         try {
             // Load the fxml file and create a new stage for the popup dialog.
             FXMLLoader loader = new FXMLLoader();
@@ -172,16 +168,16 @@ public class SwimmerController {
             e.printStackTrace();
             return false;
         }
-    }
+    }*/
 
 
-    @FXML
+   /* @FXML
     private void editSwimmer() {
         Swimmer selectedSwimmer = swimmerTable.getSelectionModel().getSelectedItem();
         if (selectedSwimmer != null) {
             boolean okClicked = showSwimmerEditDialog(selectedSwimmer);
             if (okClicked) {
-                swimmerDao.update(selectedSwimmer);
+                mainApp.getSwimmerDao().update(selectedSwimmer);
                 showPersonDetails(selectedSwimmer);
                 swimmerTable.refresh();
             }
@@ -196,5 +192,5 @@ public class SwimmerController {
 
             alert.showAndWait();
         }
-    }
+    }*/
 }

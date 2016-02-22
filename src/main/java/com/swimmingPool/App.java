@@ -27,24 +27,9 @@ public class App extends Application {
     private Stage primaryStage;
     private BorderPane rootLayout;
 
-    /**
-     * The data as an observable list of Persons.
-     */
-    private List<Swimmer> swimmers = null;
-    ObservableList<Swimmer> personData = null;
-
-    private SwimmerDao swimmerDao;
-
-    public ObservableList<Swimmer> getPersonData() {
-        return personData;
-    }
 
     public BorderPane getRootLayout() {
         return rootLayout;
-    }
-
-    public SwimmerDao getSwimmerDao() {
-        return swimmerDao;
     }
 
     public Stage getPrimaryStage() {
@@ -52,13 +37,7 @@ public class App extends Application {
     }
 
     public App(){
-        swimmerDao = new SwimmerDaoImpl();
-        swimmers = swimmerDao.getAll();
 
-        personData = FXCollections.observableArrayList();
-        for (Swimmer swimmer : swimmers) {
-            personData.add(swimmer);
-        }
     }
 
     @Override
@@ -85,7 +64,7 @@ public class App extends Application {
             // Give the controller access to the main app.
             RootLayoutController controller = loader.getController();
             controller.setMainApp(this);
-
+            controller.showSwimmerForm();
 
             primaryStage.show();
         } catch (IOException e) {
