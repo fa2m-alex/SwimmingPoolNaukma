@@ -153,7 +153,7 @@ public class SwimmerController {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Swwimmer");
+            dialogStage.setTitle("Edit Swimmer");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainApp.getPrimaryStage());
             Scene scene = new Scene(page);

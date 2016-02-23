@@ -78,3 +78,5 @@ gen
 # Created by .ignore support plugin (hsz.mobi)
 
 Constants.java
+
+src/main/resources/META-INF/
