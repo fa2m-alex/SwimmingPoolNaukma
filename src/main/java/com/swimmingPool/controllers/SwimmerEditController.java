@@ -94,7 +94,11 @@ public class SwimmerEditController {
             //swimmer.setBirthday(new Date(birthdayField.getText()));
             swimmer.setGrowth(Integer.parseInt(growthField.getText()));
             //swimmer.setCoach_id(Integer.parseInt(coachIdField.getText()));
-            swimmer.setCoach_id(coachIdField.getSelectionModel().getSelectedItem().getId());
+
+            if(coachIdField.getSelectionModel().getSelectedItem() != null)
+                swimmer.setCoach_id(coachIdField.getSelectionModel().getSelectedItem().getId());
+            else
+                swimmer.setCoach_id(0);
 
             String source=birthdayField.getText();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -136,16 +140,9 @@ public class SwimmerEditController {
             }
         }
 
-        /*if (coachIdField.getText() == null || coachIdField.getText().length() == 0) {
+        if (coachIdField.getSelectionModel().getSelectedItem() == null) {
             errorMessage += "No valid coach id!\n";
-        } else {
-            // try to parse the postal code into an int.
-            try {
-                Integer.parseInt(coachIdField.getText());
-            } catch (NumberFormatException e) {
-                errorMessage += "No valid coach id (must be an integer)!\n";
-            }
-        }*/
+        }
 
 
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
