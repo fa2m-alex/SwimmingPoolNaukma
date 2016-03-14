@@ -46,9 +46,6 @@ public class Coach {
 
     @Override
     public String toString(){
-        return "id: " + id +
-                ", name: " + name +
-                ", surname: " + surname +
-                ", birthday: " + birthday;
+        return name + " " + surname;
     }
 }

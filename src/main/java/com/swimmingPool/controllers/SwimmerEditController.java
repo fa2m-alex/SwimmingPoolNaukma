@@ -1,14 +1,21 @@
 package com.swimmingPool.controllers;
 
+import com.swimmingPool.dao.impl.CoachDaoImpl;
+import com.swimmingPool.dao.interfaces.CoachDao;
+import com.swimmingPool.models.Coach;
 import com.swimmingPool.models.Swimmer;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Alex on 20.02.2016.
@@ -23,7 +30,12 @@ public class SwimmerEditController {
     @FXML
     private TextField growthField;
     @FXML
-    private TextField coachIdField;
+    private ChoiceBox<Coach> coachIdField;
+
+    private List<Coach> coaches = null;
+    ObservableList<Coach> personData = null;
+
+    private CoachDao coachDao;
 
 
     private Stage dialogStage;
@@ -36,6 +48,15 @@ public class SwimmerEditController {
      */
     @FXML
     private void initialize() {
+        coachDao = new CoachDaoImpl();
+        coaches = coachDao.getAll();
+
+        personData = FXCollections.observableArrayList();
+        for (Coach coach : coaches) {
+            personData.add(coach);
+        }
+
+        coachIdField.setItems(personData);
     }
 
     public void setDialogStage(Stage dialogStage) {
@@ -49,7 +70,7 @@ public class SwimmerEditController {
         nameField.setText(swimmer.getName());
         surnameField.setText(swimmer.getSurname());
         growthField.setText(String.valueOf(swimmer.getGrowth()));
-        coachIdField.setText(Integer.toString(swimmer.getCoach_id()));
+        coachIdField.getSelectionModel().select(getCoachFromPersonData(swimmer.getCoach_id()));
 
         if(swimmer.getBirthday() != null)
             birthdayField.setText(swimmer.getBirthday().toString());
@@ -72,7 +93,8 @@ public class SwimmerEditController {
             swimmer.setSurname(surnameField.getText());
             //swimmer.setBirthday(new Date(birthdayField.getText()));
             swimmer.setGrowth(Integer.parseInt(growthField.getText()));
-            swimmer.setCoach_id(Integer.parseInt(coachIdField.getText()));
+            //swimmer.setCoach_id(Integer.parseInt(coachIdField.getText()));
+            swimmer.setCoach_id(coachIdField.getSelectionModel().getSelectedItem().getId());
 
             String source=birthdayField.getText();
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -114,7 +136,7 @@ public class SwimmerEditController {
             }
         }
 
-        if (coachIdField.getText() == null || coachIdField.getText().length() == 0) {
+        /*if (coachIdField.getText() == null || coachIdField.getText().length() == 0) {
             errorMessage += "No valid coach id!\n";
         } else {
             // try to parse the postal code into an int.
@@ -123,7 +145,7 @@ public class SwimmerEditController {
             } catch (NumberFormatException e) {
                 errorMessage += "No valid coach id (must be an integer)!\n";
             }
-        }
+        }*/
 
 
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
@@ -144,5 +166,14 @@ public class SwimmerEditController {
 
             return false;
         }
+    }
+
+    private Coach getCoachFromPersonData(int index){
+        Coach temp = coachDao.getById(index);
+        for (Coach coach:personData) {
+            if(coach.getId() == temp.getId())
+                return coach;
+        }
+        return null;
     }
 }
