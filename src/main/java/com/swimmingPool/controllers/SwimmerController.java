@@ -1,8 +1,11 @@
 package com.swimmingPool.controllers;
 
 import com.swimmingPool.App;
+import com.swimmingPool.dao.impl.CoachDaoImpl;
 import com.swimmingPool.dao.impl.SwimmerDaoImpl;
+import com.swimmingPool.dao.interfaces.CoachDao;
 import com.swimmingPool.dao.interfaces.SwimmerDao;
+import com.swimmingPool.models.Coach;
 import com.swimmingPool.models.Swimmer;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,6 +43,8 @@ public class SwimmerController {
     private Label birthdayLabel;
     @FXML
     private Label growthLabel;
+    @FXML
+    private Label coachLabel;
 
 
     // Reference to the main application.
@@ -48,7 +53,10 @@ public class SwimmerController {
     private List<Swimmer> swimmers = null;
     ObservableList<Swimmer> personData = null;
 
+    private List<Coach> coaches = null;
+
     private SwimmerDao swimmerDao;
+    private CoachDao coachDao;
 
 
     /**
@@ -58,6 +66,9 @@ public class SwimmerController {
     public SwimmerController() {
         swimmerDao = new SwimmerDaoImpl();
         swimmers = swimmerDao.getAll();
+
+        coachDao = new CoachDaoImpl();
+        coaches = coachDao.getAll();
 
         personData = FXCollections.observableArrayList();
         for (Swimmer swimmer : swimmers) {
@@ -91,12 +102,18 @@ public class SwimmerController {
             surnameLabel.setText(swimmer.getSurname());
             growthLabel.setText(String.valueOf(swimmer.getGrowth()));
             birthdayLabel.setText(swimmer.getBirthday().toString());
+
+            if(swimmer.getCoach_id() != 0)
+                coachLabel.setText(getCoachByIdFromAll(swimmer.getCoach_id()).toString());
+            else
+                coachLabel.setText("");
         } else {
             // Person is null, remove all the text.
             nameLabel.setText("");
             surnameLabel.setText("");
             growthLabel.setText("");
             birthdayLabel.setText("");
+            coachLabel.setText("");
         }
     }
 
@@ -196,5 +213,13 @@ public class SwimmerController {
 
             alert.showAndWait();
         }
+    }
+
+    private Coach getCoachByIdFromAll(int id){
+        for (Coach coach:coaches) {
+            if(id == coach.getId())
+                return coach;
+        }
+        return null;
     }
 }
