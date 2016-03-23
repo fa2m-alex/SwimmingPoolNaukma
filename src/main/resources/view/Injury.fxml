@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView prefHeight="355.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="167.0" text="Травма" />
+          <TableColumn prefWidth="432.0" text="Опис травми" />
+        </columns>
+      </TableView>
+      <Button layoutX="20.0" layoutY="361.0" mnemonicParsing="false" text="Додати нову травму" />
+      <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" text="Назад" />
+   </children>
+</AnchorPane>
