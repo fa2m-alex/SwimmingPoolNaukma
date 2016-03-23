@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="267.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.SwimmerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="323.0" prefWidth="708.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.SwimmerController">
    <children>
       <SplitPane dividerPositions="0.33444816053511706" layoutX="93.0" layoutY="62.0" prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -12,15 +12,15 @@
                <children>
                   <TableView fx:id="swimmerTable" layoutX="-17.0" layoutY="-17.0" prefHeight="298.0" prefWidth="197.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <columns>
-                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
-                      <TableColumn fx:id="surnameColumn" prefWidth="75.0" text="Surname" />
+                      <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Ім'я" />
+                      <TableColumn fx:id="surnameColumn" prefWidth="75.0" text="Прізвище" />
                     </columns>
                   </TableView>
                </children>
             </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="265.0" prefWidth="425.0">
                <children>
-                  <Label layoutX="14.0" layoutY="14.0" text="Information" />
+                  <Label layoutX="14.0" layoutY="14.0" prefHeight="17.0" prefWidth="151.0" text="Інформація про плавця:" />
                   <GridPane layoutX="14.0" layoutY="31.0" prefHeight="173.0" prefWidth="373.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -34,25 +34,23 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label text="Name" />
+                        <Label text="Ім'я:" />
                         <Label fx:id="nameLabel" text="Label" GridPane.columnIndex="1" />
-                        <Label text="Surname" GridPane.rowIndex="1" />
+                        <Label text="Прізвище:" GridPane.rowIndex="1" />
                         <Label fx:id="surnameLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <Label text="Birthday" GridPane.rowIndex="2" />
+                        <Label text="Дата народження:" GridPane.rowIndex="2" />
                         <Label fx:id="birthdayLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <Label text="Growth" GridPane.rowIndex="3" />
+                        <Label text="Зріст:" GridPane.rowIndex="3" />
                         <Label fx:id="growthLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <Label text="Coach" GridPane.rowIndex="4" />
+                        <Label text="Тренер:" GridPane.rowIndex="4" />
                         <Label fx:id="coachLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                      </children>
                   </GridPane>
-                  <HBox layoutX="236.0" layoutY="226.0" spacing="3.0">
-                     <children>
-                        <Button layoutX="243.0" layoutY="259.0" mnemonicParsing="false" onAction="#newSwimmer" text="New.." />
-                        <Button layoutX="295.0" layoutY="259.0" mnemonicParsing="false" onAction="#editSwimmer" text="Edit.." />
-                        <Button layoutX="347.0" layoutY="259.0" mnemonicParsing="false" onAction="#deleteSwimmer" text="Delete" />
-                     </children>
-                  </HBox>
+                  <HBox layoutX="236.0" layoutY="226.0" spacing="3.0" />
+                  <Button layoutX="14.0" layoutY="204.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="174.0" text="Переглянути травми" />
+                  <Button layoutX="101.0" layoutY="282.0" mnemonicParsing="false" onAction="#newSwimmer" text="Додати плавця" />
+                  <Button layoutX="212.0" layoutY="282.0" mnemonicParsing="false" onAction="#editSwimmer" text="Редагувати плавця" />
+                  <Button layoutX="343.0" layoutY="282.0" mnemonicParsing="false" onAction="#deleteSwimmer" text="Видалити плавця" />
                </children>
             </AnchorPane>
         </items>
