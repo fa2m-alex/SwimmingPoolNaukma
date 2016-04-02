@@ -72,6 +72,14 @@ public class CompetitionController {
     @FXML
     private void initialize() {
         titleColumn.setCellValueFactory(new PropertyValueFactory<Competition, String>("title"));
+
+        // Clear person details.
+        showPersonDetails(null);
+
+        // Listen for selection changes and show the person details when changed.
+        competitionTable.getSelectionModel().selectedItemProperty().addListener(
+                (observable, oldValue, newValue) -> showPersonDetails(newValue));
+
     }
 
     public void setMainApp(App mainApp){
@@ -82,23 +90,44 @@ public class CompetitionController {
     }
 
     private void showPersonDetails(Competition competition) {
-        /*if (competition != null) {
+        if (competition != null) {
             // Fill the labels with info from the person object.
             titleLabel.setText(competition.getTitle());
             dateLabel.setText(competition.getDate().toString());
 
             if(competition.getType_id() != 0)
-                typeLabel.setText(competitionTypes.);
+                typeLabel.setText(getTypeByIdFromAll(competition.getType_id()).getType());
             else
-                coachLabel.setText("");
+                typeLabel.setText("");
+
+            if(competition.getDiscipline_id() != 0)
+                disciplineLabel.setText(getDisciplineByIdFromAll(competition.getDiscipline_id()).getTitle());
+            else
+                disciplineLabel.setText("");
+
         } else {
             // Person is null, remove all the text.
-            nameLabel.setText("");
-            surnameLabel.setText("");
-            growthLabel.setText("");
-            birthdayLabel.setText("");
-            coachLabel.setText("");
-        }*/
+            titleLabel.setText("");
+            dateLabel.setText("");
+            typeLabel.setText("");
+            disciplineLabel.setText("");
+        }
+    }
+
+    private CompetitionType getTypeByIdFromAll(int id){
+        for (CompetitionType competitionType:competitionTypes) {
+            if(id == competitionType.getId())
+                return competitionType;
+        }
+        return null;
+    }
+
+    private Discipline getDisciplineByIdFromAll(int id){
+        for (Discipline discipline:disciplines) {
+            if(id == discipline.getId())
+                return discipline;
+        }
+        return null;
     }
 
 }

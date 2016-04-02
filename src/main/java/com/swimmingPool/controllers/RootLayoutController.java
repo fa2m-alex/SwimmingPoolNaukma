@@ -71,4 +71,25 @@ public class RootLayoutController {
             e.printStackTrace();
         }
     }
+
+    @FXML
+    private void showCompetitionForm() {
+        try {
+            label.setText("Competitions");
+
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/view/CompetitionForm.fxml"));
+            AnchorPane personOverview = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            mainApp.getRootLayout().setCenter(personOverview);
+
+            // Give the controller access to the main app.
+            CompetitionController controller = loader.getController();
+            controller.setMainApp(mainApp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
