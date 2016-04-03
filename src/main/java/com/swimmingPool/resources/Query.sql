@@ -37,7 +37,8 @@ CREATE TABLE `swimmer` (
   `surname` VARCHAR(255) NOT NULL,
   `birthday` DATE NOT NULL,
   `growth` INTEGER NOT NULL,
-  `coach_id` INTEGER
+  `coach_id` INTEGER,
+  `rating_mark` INTEGER
 );
 
 CREATE INDEX `idx_swimmer__coach_id` ON `swimmer` (`coach_id`);
