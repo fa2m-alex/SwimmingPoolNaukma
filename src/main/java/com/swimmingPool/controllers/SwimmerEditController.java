@@ -166,9 +166,9 @@ public class SwimmerEditController {
     }
 
     private Coach getCoachFromPersonData(int index){
-        Coach temp = coachDao.getById(index);
+        //Coach temp = coachDao.getById(index);
         for (Coach coach:personData) {
-            if(coach.getId() == temp.getId())
+            if(coach.getId() == index)
                 return coach;
         }
         return null;

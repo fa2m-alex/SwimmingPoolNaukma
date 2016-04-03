@@ -1,8 +1,11 @@
 package com.swimmingPool.controllers;
 
 import com.swimmingPool.App;
+import com.swimmingPool.resources.CheckGuest;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
@@ -15,6 +18,8 @@ public class RootLayoutController {
 
     @FXML
     private Label label;
+    @FXML
+    private Button loginButton;
 
     // Reference to the main application
     private App mainApp;
@@ -37,7 +42,10 @@ public class RootLayoutController {
 
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/view/SwimmerForm.fxml"));
+            if(CheckGuest.isGuest)
+                loader.setLocation(App.class.getResource("/view/SwimmerFormGuest.fxml"));
+            else
+                loader.setLocation(App.class.getResource("/view/SwimmerForm.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -58,7 +66,10 @@ public class RootLayoutController {
 
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/view/CoachForm.fxml"));
+            if(CheckGuest.isGuest)
+                loader.setLocation(App.class.getResource("/view/CoachFormGuest.fxml"));
+            else
+                loader.setLocation(App.class.getResource("/view/CoachForm.fxml"));
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
@@ -90,6 +101,20 @@ public class RootLayoutController {
             controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void loginAdmin(){
+        if(CheckGuest.isGuest){
+            CheckGuest.isGuest = false;
+            showSwimmerForm();
+            loginButton.setText("Log out");
+        }
+        else{
+            CheckGuest.isGuest = true;
+            showSwimmerForm();
+            loginButton.setText("Log in");
         }
     }
 }
