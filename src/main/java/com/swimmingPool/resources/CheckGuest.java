@@ -5,4 +5,7 @@ package com.swimmingPool.resources;
  */
 public class CheckGuest {
     public static boolean isGuest = true;
+
+    public static String login = "admin";
+    public static String password = "admin";
 }
