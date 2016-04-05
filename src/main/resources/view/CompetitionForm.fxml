@@ -4,7 +4,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.CompetitionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="305.0" prefWidth="592.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.CompetitionController">
    <children>
       <SplitPane dividerPositions="0.29797979797979796" layoutX="94.0" layoutY="56.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -41,9 +41,13 @@
                         <Label fx:id="disciplineLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
-                  <Button layoutX="335.0" layoutY="359.0" mnemonicParsing="false" text="Видалити" />
-                  <Button layoutX="251.0" layoutY="359.0" mnemonicParsing="false" text="Редагувати" />
-                  <Button layoutX="189.0" layoutY="359.0" mnemonicParsing="false" text="Додати" />
+                  <HBox layoutX="196.0" layoutY="267.0" prefHeight="28.0" prefWidth="205.0" spacing="3.0">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#newCompetiton" prefHeight="25.0" prefWidth="68.0" text="Додати" />
+                        <Button mnemonicParsing="false" onAction="#editCompetition" text="Редагувати" />
+                        <Button mnemonicParsing="false" onAction="#deleteCompetition" text="Видалити" />
+                     </children>
+                  </HBox>
                </children>
             </AnchorPane>
         </items>

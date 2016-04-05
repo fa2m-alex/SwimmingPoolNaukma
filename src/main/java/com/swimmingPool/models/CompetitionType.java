@@ -26,7 +26,6 @@ public class CompetitionType {
 
     @Override
     public String toString() {
-        return "id: " + id +
-                ", type: " + type;
+        return type;
     }
 }

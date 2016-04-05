@@ -13,11 +13,18 @@ import com.swimmingPool.models.Discipline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -82,6 +89,7 @@ public class CompetitionController {
 
     }
 
+
     public void setMainApp(App mainApp){
         this.mainApp = mainApp;
 
@@ -129,5 +137,92 @@ public class CompetitionController {
         }
         return null;
     }
+
+    private boolean openDialog(Competition competition){
+        try {
+            // Load the fxml file and create a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/view/CompetitionEditForm.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+
+            // Create the dialog Stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle("Edit Swimmer");
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(mainApp.getPrimaryStage());
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+
+            // Set the person into the controller.
+            CompetitionEditController controller = loader.getController();
+            controller.setDialogStage(dialogStage);
+            controller.setCompetition(competition);
+
+            // Show the dialog and wait until the user closes it
+            dialogStage.showAndWait();
+
+            return controller.isOkClicked();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @FXML
+    private void newCompetiton(){
+        Competition temp = new Competition();
+        boolean okClicked = openDialog(temp);
+        if (okClicked) {
+            personData.add(temp);
+            competitionDao.insert(temp);
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("Competition has been added");
+            alert.setHeaderText("Competition has been added");
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void editCompetition(){
+        Competition selectedCompetition = competitionTable.getSelectionModel().getSelectedItem();
+        if (selectedCompetition != null) {
+            boolean okClicked = openDialog(selectedCompetition);
+            if (okClicked) {
+                competitionDao.update(selectedCompetition);
+                showPersonDetails(selectedCompetition);
+                competitionTable.refresh();
+            }
+
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Competition Selected");
+            alert.setContentText("Please select a competition in the table.");
+
+            alert.showAndWait();
+        }
+    }
+
+    @FXML
+    private void deleteCompetition(){
+        int selectedIndex = competitionTable.getSelectionModel().getSelectedIndex();
+        if (selectedIndex >= 0) {
+            competitionDao.delete(competitionTable.getSelectionModel().getSelectedItem());
+            competitionTable.getItems().remove(selectedIndex);
+        } else {
+            // Nothing selected.
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.initOwner(mainApp.getPrimaryStage());
+            alert.setTitle("No Selection");
+            alert.setHeaderText("No Competition Selected");
+            alert.setContentText("Please select a competition in the table.");
+
+            alert.showAndWait();
+        }
+    }
+
 
 }

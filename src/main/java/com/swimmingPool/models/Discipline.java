@@ -26,7 +26,6 @@ public class Discipline {
 
     @Override
     public String toString() {
-        return "id: " + id +
-                ", title: " + title;
+        return title;
     }
 }

@@ -24,14 +24,14 @@
             <Label text="Дисципліна" GridPane.rowIndex="3" />
             <TextField fx:id="titleField" GridPane.columnIndex="1" />
             <TextField fx:id="dateField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="competitionTypeChoiceBox" prefHeight="25.0" prefWidth="368.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="disciplineChoiceBox" prefHeight="25.0" prefWidth="369.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <ChoiceBox fx:id="typeField" prefHeight="25.0" prefWidth="368.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="disciplineField" prefHeight="25.0" prefWidth="369.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
       <HBox layoutX="409.0" layoutY="226.0" spacing="3.0">
          <children>
-            <Button layoutX="440.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="75.0" text="Зберегти" />
-            <Button layoutX="501.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="73.0" text="Відмінити" />
+            <Button layoutX="440.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleOk" prefHeight="25.0" prefWidth="75.0" text="OK" />
+            <Button layoutX="501.0" layoutY="254.0" mnemonicParsing="false" onAction="#handleCancel" prefHeight="25.0" prefWidth="73.0" text="Cancel" />
          </children>
       </HBox>
    </children>
