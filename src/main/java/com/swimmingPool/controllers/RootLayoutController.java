@@ -94,7 +94,11 @@ public class RootLayoutController {
 
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(App.class.getResource("/view/CompetitionForm.fxml"));
+            if(CheckGuest.isGuest)
+                loader.setLocation(App.class.getResource("/view/CompetitionFormGuest.fxml"));
+            else
+                loader.setLocation(App.class.getResource("/view/CompetitionForm.fxml"));
+
             AnchorPane personOverview = (AnchorPane) loader.load();
 
             // Set person overview into the center of root layout.
