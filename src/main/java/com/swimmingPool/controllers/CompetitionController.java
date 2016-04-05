@@ -147,7 +147,7 @@ public class CompetitionController {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Swimmer");
+            dialogStage.setTitle("Редагування змагання");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainApp.getPrimaryStage());
             Scene scene = new Scene(page);
@@ -177,8 +177,8 @@ public class CompetitionController {
             competitionDao.insert(temp);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("Competition has been added");
-            alert.setHeaderText("Competition has been added");
+            alert.setTitle("Змагання додано");
+            alert.setHeaderText("Змагання додано");
             alert.showAndWait();
         }
     }
@@ -198,9 +198,9 @@ public class CompetitionController {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Competition Selected");
-            alert.setContentText("Please select a competition in the table.");
+            alert.setTitle("Не обрано");
+            alert.setHeaderText("Не обрано жодного змагання");
+            alert.setContentText("Будь ласка оберіть змагання");
 
             alert.showAndWait();
         }
@@ -216,10 +216,9 @@ public class CompetitionController {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Competition Selected");
-            alert.setContentText("Please select a competition in the table.");
-
+            alert.setTitle("Не обрано");
+            alert.setHeaderText("Не обрано жодного змагання");
+            alert.setContentText("Будь ласка оберіть змагання");
             alert.showAndWait();
         }
     }

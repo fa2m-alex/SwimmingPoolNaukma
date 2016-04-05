@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="469.0" prefWidth="758.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.RootLayoutController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="470.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.swimmingPool.controllers.RootLayoutController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>

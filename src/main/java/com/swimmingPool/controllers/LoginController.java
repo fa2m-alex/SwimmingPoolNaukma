@@ -52,7 +52,7 @@ public class LoginController {
         String errorMessage = "";
 
         if (!loginField.getText().equals(CheckGuest.login) && !passwordField.getText().equals(CheckGuest.password)) {
-            errorMessage += "No valid login!\n";
+            errorMessage += "Невірні дані!\n";
         }
         /*if (passwordField.getText() == null || passwordField.getText().length() == 0) {
             errorMessage += "No valid password!\n";
@@ -64,8 +64,8 @@ public class LoginController {
             // Show the error message.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle("Невалідні поля");
+            alert.setHeaderText("Виправте будь ласка");
             alert.setContentText(errorMessage);
 
             alert.showAndWait();

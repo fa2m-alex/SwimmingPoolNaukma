@@ -87,16 +87,16 @@ public class CoachEditController {
         String errorMessage = "";
 
         if (nameField.getText() == null || nameField.getText().length() == 0) {
-            errorMessage += "No valid name!\n";
+            errorMessage += "Невалідне ім'я!\n";
         }
         if (surnameField.getText() == null || surnameField.getText().length() == 0) {
-            errorMessage += "No valid surname!\n";
+            errorMessage += "Невалідне прізвище!\n";
         }
 
 
 
         if (birthdayField.getText() == null || birthdayField.getText().length() == 0) {
-            errorMessage += "No valid birthday!\n";
+            errorMessage += "Невалідна дата народження!\n";
         }
 
         if (errorMessage.length() == 0) {
@@ -105,8 +105,8 @@ public class CoachEditController {
             // Show the error message.
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
-            alert.setHeaderText("Please correct invalid fields");
+            alert.setTitle("Невалідні поля");
+            alert.setHeaderText("Виправте будь ласка");
             alert.setContentText(errorMessage);
 
             alert.showAndWait();

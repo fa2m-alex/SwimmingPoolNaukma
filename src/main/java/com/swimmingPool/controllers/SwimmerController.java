@@ -137,9 +137,10 @@ public class SwimmerController {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setTitle("Не обрано");
+            alert.setHeaderText("Не обрано жодного плавця");
+            alert.setContentText("Будь ласка оберіть плавця");
+
 
             alert.showAndWait();
         }
@@ -155,8 +156,8 @@ public class SwimmerController {
             swimmerDao.insert(temp);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("Swimmer has been added");
-            alert.setHeaderText("Swimmer has been added");
+            alert.setTitle("Плавця додано");
+            alert.setHeaderText("Плавця додано");
             alert.showAndWait();
         }
     }
@@ -170,7 +171,7 @@ public class SwimmerController {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Swimmer");
+            dialogStage.setTitle("Редагування плавця");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainApp.getPrimaryStage());
             Scene scene = new Scene(page);
@@ -207,9 +208,10 @@ public class SwimmerController {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setTitle("Не обрано");
+            alert.setHeaderText("Не обрано жодного плавця");
+            alert.setContentText("Будь ласка оберіть плавця");
+
 
             alert.showAndWait();
         }

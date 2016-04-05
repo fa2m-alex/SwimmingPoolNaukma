@@ -20,7 +20,8 @@ CREATE TABLE `competition` (
   `title` VARCHAR(255) NOT NULL,
   `date` DATE NOT NULL,
   `type_id` INTEGER NOT NULL,
-  `discipline_id` INTEGER NOT NULL
+  `discipline_id` INTEGER NOT NULL,
+  `is_opened` BOOLEAN
 );
 
 CREATE INDEX `idx_competition__discipline_id` ON `competition` (`discipline_id`);
@@ -48,7 +49,9 @@ ALTER TABLE `swimmer` ADD CONSTRAINT `fk_swimmer__coach_id` FOREIGN KEY (`coach_
 CREATE TABLE `competition_table` (
   `id` INTEGER PRIMARY KEY AUTO_INCREMENT,
   `competition_id` INTEGER NOT NULL,
-  `swimmer_id` INTEGER NOT NULL
+  `swimmer_id` INTEGER NOT NULL,
+  `place` INTEGER NOT NULL,
+  `time` INTEGER NOT NULL
 );
 
 CREATE INDEX `idx_competition_table__competition_id` ON `competition_table` (`competition_id`);

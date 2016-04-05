@@ -42,7 +42,7 @@ public class RootLayoutController {
     @FXML
     public void showSwimmerForm() {
         try {
-            label.setText("Swimmers");
+            label.setText("Плавці");
 
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -66,7 +66,7 @@ public class RootLayoutController {
     @FXML
     private void showCoachForm() {
         try {
-            label.setText("Coaches");
+            label.setText("Тренери");
 
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();
@@ -90,7 +90,7 @@ public class RootLayoutController {
     @FXML
     private void showCompetitionForm() {
         try {
-            label.setText("Competitions");
+            label.setText("Змагання");
 
             // Load person overview.
             FXMLLoader loader = new FXMLLoader();

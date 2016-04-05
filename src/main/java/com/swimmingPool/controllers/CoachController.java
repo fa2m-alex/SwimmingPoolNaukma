@@ -116,9 +116,9 @@ public class CoachController {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setTitle("Не обрано");
+            alert.setHeaderText("Не обрано жодного тренера");
+            alert.setContentText("Будь ласка оберіть тренера");
 
             alert.showAndWait();
         }
@@ -134,8 +134,8 @@ public class CoachController {
             coachDao.insert(temp);
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("Coach has been added");
-            alert.setHeaderText("Coach has been added");
+            alert.setTitle("Тренера було додано");
+            alert.setHeaderText("Тренера було додано");
             alert.showAndWait();
         }
     }
@@ -157,9 +157,9 @@ public class CoachController {
             // Nothing selected.
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.initOwner(mainApp.getPrimaryStage());
-            alert.setTitle("No Selection");
-            alert.setHeaderText("No Person Selected");
-            alert.setContentText("Please select a person in the table.");
+            alert.setTitle("Не обрано");
+            alert.setHeaderText("Не обрано жодного тренера");
+            alert.setContentText("Будь ласка оберіть тренера");
 
             alert.showAndWait();
         }
@@ -174,7 +174,7 @@ public class CoachController {
 
             // Create the dialog Stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle("Edit Coach");
+            dialogStage.setTitle("Редагування тренера");
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(mainApp.getPrimaryStage());
             Scene scene = new Scene(page);
