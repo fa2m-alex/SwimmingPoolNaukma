@@ -93,6 +93,7 @@ public class SwimmerEditController {
             swimmer.setSurname(surnameField.getText());
             //swimmer.setBirthday(new Date(birthdayField.getText()));
             swimmer.setGrowth(Integer.parseInt(growthField.getText()));
+            swimmer.setRating_mark((0));
             //swimmer.setCoach_id(Integer.parseInt(coachIdField.getText()));
 
             if(coachIdField.getSelectionModel().getSelectedItem() != null)

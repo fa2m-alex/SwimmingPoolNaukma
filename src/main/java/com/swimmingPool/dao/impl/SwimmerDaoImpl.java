@@ -14,10 +14,10 @@ public class SwimmerDaoImpl implements SwimmerDao {
     private static final String USER = Constants.USER;
     private static final String PASS = Constants.PASS;
 
-    private String insert = "INSERT INTO swimmer (id, name, surname, birthday, growth, coach_id) VALUES (NULL, ?, ?, ?, ?, ?)";
+    private String insert = "INSERT INTO swimmer (id, name, surname, birthday, growth, coach_id, rating_mark) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
     private String getAll = "SELECT * FROM swimmer";
     private String getById = "SELECT * FROM swimmer WHERE id = ?";
-    private String update = "UPDATE swimmer SET name=?, surname=?, birthday=?, growth=?, coach_id=? WHERE id=?";
+    private String update = "UPDATE swimmer SET name=?, surname=?, birthday=?, growth=?, coach_id=?, rating_mark=? WHERE id=?";
     private String delete = "DELETE FROM swimmer WHERE id=?";
 
     public void insert(Swimmer swimmer) {
@@ -32,7 +32,7 @@ public class SwimmerDaoImpl implements SwimmerDao {
             preparedStatement.setDate(3, (Date) swimmer.getBirthday());
             preparedStatement.setInt(4, swimmer.getGrowth());
             preparedStatement.setInt(5, swimmer.getCoach_id());
-
+            preparedStatement.setInt(6, swimmer.getRating_mark());
             preparedStatement.executeUpdate();
             preparedStatement.close();
 
@@ -64,7 +64,7 @@ public class SwimmerDaoImpl implements SwimmerDao {
                 swimmer.setBirthday(resultSet.getDate("birthday"));
                 swimmer.setGrowth(resultSet.getInt("growth"));
                 swimmer.setCoach_id(resultSet.getInt("coach_id"));
-
+                swimmer.setRating_mark((resultSet.getInt("rating_mark")));
                 swimmers.add(swimmer);
             }
             resultSet.close();
@@ -99,6 +99,7 @@ public class SwimmerDaoImpl implements SwimmerDao {
                 swimmer.setBirthday(resultSet.getDate("birthday"));
                 swimmer.setGrowth(resultSet.getInt("growth"));
                 swimmer.setCoach_id(resultSet.getInt("coach_id"));
+                swimmer.setRating_mark(resultSet.getInt("rating_mark"));
             }
 
             resultSet.close();
@@ -124,8 +125,8 @@ public class SwimmerDaoImpl implements SwimmerDao {
             preparedStatement.setDate(3, (Date) swimmer.getBirthday());
             preparedStatement.setInt(4, swimmer.getGrowth());
             preparedStatement.setInt(5, swimmer.getCoach_id());
-            preparedStatement.setInt(6, swimmer.getId());
-
+            preparedStatement.setInt(7, swimmer.getId());
+            preparedStatement.setInt(6, swimmer.getRating_mark());
             preparedStatement.executeUpdate();
             preparedStatement.close();
 

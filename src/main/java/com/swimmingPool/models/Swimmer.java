@@ -10,6 +10,7 @@ public class Swimmer {
     private Date birthday;
     private int growth;
     private int coach_id;
+    private int rating_mark;
 
     public int getId() {
         return id;
@@ -49,6 +50,14 @@ public class Swimmer {
 
     public void setGrowth(int growth) {
         this.growth = growth;
+    }
+
+    public int getRating_mark() {
+        return rating_mark;
+    }
+
+    public void setRating_mark(int rating_mark) {
+        this.rating_mark = rating_mark;
     }
 
     public int getCoach_id() {
