@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -81,6 +80,30 @@ public class RootLayoutController {
 
             // Give the controller access to the main app.
             CoachController controller = loader.getController();
+            controller.setMainApp(mainApp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void showInjuryForm() {
+        try {
+            label.setText("Травми");
+
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            if(CheckGuest.isGuest)
+                loader.setLocation(App.class.getResource("/view/InjuryFormGuest.fxml"));
+            else
+                loader.setLocation(App.class.getResource("/view/InjuryForm.fxml"));
+            AnchorPane personOverview = (AnchorPane) loader.load();
+
+            // Set person overview into the center of root layout.
+            mainApp.getRootLayout().setCenter(personOverview);
+
+            // Give the controller access to the main app.
+            InjuryController controller = loader.getController();
             controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
