@@ -36,7 +36,7 @@
                         <Label text="Дата травми:" GridPane.rowIndex="1" />
                         <Label fx:id="dateLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label text="Плавець:" GridPane.rowIndex="2" />
-                        <Label fx:id="swimerLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Label fx:id="swimmerLabel" text="Label" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                   <HBox layoutX="228.0" layoutY="199.0" spacing="4.0" />

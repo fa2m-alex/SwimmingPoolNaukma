@@ -95,15 +95,15 @@ public class InjuryController {
             titleLabel.setText(injury.getTitle());
             dateLabel.setText(injury.getDate().toString());
             //swimerLabel.setText(injury.getSwimmer_id());
-            /*if(injury.getSwimmer_id() != 0)
+            if(injury.getSwimmer_id() != 0)
                 swimmerLabel.setText(getSwimmerByIdFromAll(injury.getSwimmer_id()).toString());
             else
-                swimmerLabel.setText("");*/
+                swimmerLabel.setText("");
         } else {
             // Person is null, remove all the text.
             titleLabel.setText("");
             dateLabel.setText("");
-            //swimmerLabel.setText("");
+            swimmerLabel.setText("");
         }
     }
 

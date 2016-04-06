@@ -70,10 +70,6 @@ public class Swimmer {
 
     @Override
     public String toString(){
-        return "id: " + id +
-                ", name: " + name +
-                ", surname: " + surname +
-                ", birthday: " + birthday +
-                ", growth: " + growth;
+        return name + " " + surname;
     }
 }
