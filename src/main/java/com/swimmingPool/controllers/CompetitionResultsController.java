@@ -84,7 +84,7 @@ public class CompetitionResultsController {
         }
 
         personData = FXCollections.observableArrayList();
-        for (Swimmer swimmer : swimmers) {
+        for (Swimmer swimmer :  swimmers) {
             personData.add(swimmer);
         }
     }
