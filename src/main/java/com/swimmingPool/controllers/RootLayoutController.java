@@ -10,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -102,6 +103,27 @@ public class RootLayoutController {
 
             // Give the controller access to the main app.
             CompetitionController controller = loader.getController();
+            controller.setMainApp(mainApp);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    private void showComtetitionResultsForm() {
+        try {
+            label.setText("Results");
+
+            // Load person overview.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(App.class.getResource("/view/CompetitionResultsForm.fxml"));
+            Pane personOverview = (Pane) loader.load();
+
+            // Set person overview into the center of root layout.
+            mainApp.getRootLayout().setCenter(personOverview);
+
+            // Give the controller access to the main app.
+            CompetitionResultsController controller = loader.getController();
             controller.setMainApp(mainApp);
         } catch (IOException e) {
             e.printStackTrace();
