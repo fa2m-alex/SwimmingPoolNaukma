@@ -34,6 +34,8 @@ public class SwimmerController {
     private TableColumn<Swimmer, String> nameColumn;
     @FXML
     private TableColumn<Swimmer, String> surnameColumn;
+    @FXML
+    private TableColumn<Swimmer, Integer> ratingColumn;
 
     @FXML
     private Label nameLabel;
@@ -86,6 +88,7 @@ public class SwimmerController {
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<Swimmer, String>("name"));
         surnameColumn.setCellValueFactory(new PropertyValueFactory<Swimmer, String>("surname"));
+        ratingColumn.setCellValueFactory(new PropertyValueFactory<Swimmer, Integer>("rating_mark"));
 
         // Clear person details.
         showPersonDetails(null);
